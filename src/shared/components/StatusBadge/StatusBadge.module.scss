@@ -1,0 +1,38 @@
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+
+.active {
+  color: var(--success);
+}
+
+.active .dot {
+  background: var(--success);
+}
+
+.paused {
+  color: #9a6b00;
+}
+
+.paused .dot {
+  background: var(--warning);
+}
+
+.expired {
+  color: var(--danger);
+}
+
+.expired .dot {
+  background: var(--danger);
+}

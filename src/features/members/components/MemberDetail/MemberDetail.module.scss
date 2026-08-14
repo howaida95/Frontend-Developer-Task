@@ -1,0 +1,345 @@
+.modal .drawerHeader {
+  margin-bottom: 0;
+}
+
+:global(html[dir='rtl']) .modal > header h2 {
+  flex: 1;
+  text-align: right;
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.drawerHeader h2 {
+  font-size: 20px;
+  margin: 0 0 2px;
+}
+
+.drawerHeader span {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.drawerLoading {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  color: var(--ink-2);
+  text-align: center;
+}
+
+.memberCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.memberCell strong,
+.memberCell span {
+  display: block;
+}
+
+.memberCell strong {
+  font-size: 13px;
+}
+
+.memberCell span {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--brand-wash);
+  color: var(--brand-deep);
+  display: grid;
+  place-items: center;
+  font-weight: 750;
+  flex-shrink: 0;
+}
+
+.progressCard {
+  background: var(--brand-wash);
+  border: 1px solid #d3deeb;
+  padding: 17px;
+  border-radius: 9px;
+  margin: 24px 0;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--ink-2);
+  font-weight: 650;
+}
+
+.progressTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 7px;
+}
+
+.progressTop strong {
+  font-size: 28px;
+}
+
+.progressTop span {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.progressTrack {
+  height: 8px;
+  background: #dbe3ec;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--brand);
+  border-radius: 999px;
+  transition: width 0.25s;
+}
+
+:global(html[dir='rtl']) .progressFill {
+  margin-inline-start: auto;
+}
+
+.detailSection {
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid var(--line-2);
+}
+
+.detailSection h3 {
+  font-size: 15px;
+  margin: 0 0 13px;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.info span {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.info strong {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.confidentialHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.confidentialHeader p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--ink-3);
+  max-width: 330px;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: var(--ink-2);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toggleButton:hover {
+  background: var(--brand-wash);
+  color: var(--brand);
+}
+
+.toggleButton svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--ink-2);
+}
+
+.confidentialBox {
+  display: grid;
+  gap: 13px;
+  padding: 13px;
+  background: #fffaf4;
+  border: 1px solid #f0dfbd;
+  border-radius: 8px;
+}
+
+.redacted {
+  display: grid;
+  gap: 8px;
+  padding: 13px;
+  background: repeating-linear-gradient(45deg, #f3f5f7 0 5px, #fafbfc 5px 10px);
+  border-radius: 8px;
+  color: var(--ink-3);
+  font-family: ui-monospace, monospace;
+}
+
+.sessionList {
+  border-top: 1px solid var(--line-2);
+}
+
+.sessionRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.sessionRow strong,
+.sessionRow span {
+  display: block;
+}
+
+.sessionRow strong {
+  font-size: 13px;
+}
+
+.sessionRow span {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.sessionMeta {
+  text-align: end;
+}
+
+:global(html[dir='rtl']) .sessionMeta {
+  text-align: start;
+}
+
+.detailSkeleton {
+  padding-bottom: 8px;
+}
+
+.skeletonAvatar {
+  display: block;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.skeletonMemberNumber,
+.skeletonLabel {
+  display: block;
+  width: 90px;
+  height: 10px;
+}
+
+.skeletonProgress {
+  display: block;
+  width: 70px;
+  height: 28px;
+  margin-top: 10px;
+}
+
+.skeletonTrack {
+  display: block;
+  width: 100%;
+  height: 8px;
+  margin-top: 12px;
+  border-radius: 999px;
+}
+
+.skeletonHeading {
+  display: block;
+  width: 130px;
+  height: 15px;
+  margin-bottom: 13px;
+}
+
+.skeletonValue {
+  display: block;
+  width: 110px;
+  height: 13px;
+}
+
+.skeletonBox {
+  display: block;
+  width: 100%;
+  height: 90px;
+  border-radius: 8px;
+}
+
+.sessionRowSkeleton {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.sessionRowSkeleton > div {
+  display: grid;
+  gap: 8px;
+}
+
+.sessionRowSkeleton > div:last-child {
+  justify-items: end;
+}
+
+.skeletonSmall {
+  display: block;
+  width: 75px;
+  height: 10px;
+}
+
+@media (max-width: 720px) {
+  .detailGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 430px) {
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .confidentialHeader,
+  .sessionRow {
+    display: grid;
+  }
+
+  .sessionMeta {
+    text-align: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressFill {
+    transition: none;
+  }
+}
