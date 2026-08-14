@@ -40,6 +40,26 @@
   color: var(--danger);
 }
 
+.text {
+  background: none;
+  border: none;
+  color: #0066cc;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  min-height: auto;
+  transition: color 0.2s ease;
+}
+
+.text:hover {
+  color: #0052a3;
+}
+
+.text:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
 @media (max-width: 720px) {
   .button {
     min-height: 44px;

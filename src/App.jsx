@@ -4,6 +4,7 @@ import { hydrateSession, logout } from '@features/auth/authSlice';
 import AppRoutes from '@routes';
 import ErrorBoundary from '@shared/components/ErrorBoundary/index.js';
 import PageSkeleton from '@shared/ui/PageSkeleton';
+import { t } from '@shared/i18n';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export default function App() {
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = t('brand', lang) ;
   }, [lang]);
 
   useEffect(() => {

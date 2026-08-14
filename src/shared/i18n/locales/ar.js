@@ -88,6 +88,7 @@ const ar = {
   switchToEnglish: 'التبديل إلى الإنجليزية',
   notFoundTitle: 'الصفحة غير موجودة',
   notFoundMessage: 'الصفحة التي فتحتها غير موجودة أو تم نقلها.',
-  notFoundAction: 'العودة إلى الصفحة الرئيسية'
+  notFoundAction: 'العودة إلى الصفحة الرئيسية',
+  loadMore: 'تحميل المزيد',
 };
 export default ar;

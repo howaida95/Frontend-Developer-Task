@@ -89,6 +89,7 @@ const en = {
   switchToEnglish: 'Switch to English',
   notFoundTitle: 'Page not found',
   notFoundMessage: 'The page you opened does not exist or has moved.',
-  notFoundAction: 'Back to home'
+  notFoundAction: 'Back to home',
+  loadMore: 'Load more',
 };
 export default en;
