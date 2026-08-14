@@ -131,12 +131,18 @@
   :global(.mobileTop) .languageToggle {
     width: auto;
     min-width: 72px;
+    min-height: 44px;
     justify-content: center;
   }
 
   .languageToggle .toggleButton {
     min-width: 100%;
     width: 100%;
+    min-height: 44px;
+  }
+
+  .option {
+    height: 44px;
   }
 
   .chevron {

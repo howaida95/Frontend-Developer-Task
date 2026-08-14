@@ -13,7 +13,7 @@
 }
 
 .searchWrap {
-  height: 42px;
+  min-height: 44px;
   border: 1px solid var(--line);
   border-radius: 8px;
   display: flex;
@@ -150,7 +150,9 @@
   border: 1px solid var(--line);
   background: #fff;
   border-radius: 7px;
-  padding: 7px 10px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
   color: var(--ink-2);
 }
 
@@ -172,6 +174,13 @@
 
   .searchWrap {
     grid-column: auto;
+  }
+
+  .inlineError button,
+  .sortButton {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   .pagination {

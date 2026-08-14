@@ -247,10 +247,16 @@
 
   .closeButton {
     display: flex;
+    width: 44px;
+    height: 44px;
   }
 
   .sidebar nav {
     margin-top: 30px;
+  }
+
+  .navItem {
+    height: 44px;
   }
 
   .footer {

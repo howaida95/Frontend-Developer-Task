@@ -37,6 +37,12 @@
   cursor: pointer;
 }
 
+@media (max-width: 720px) {
+  .table tbody tr[tabindex='0'] {
+    height: 44px;
+  }
+}
+
 .empty {
   text-align: center;
   padding: 50px;

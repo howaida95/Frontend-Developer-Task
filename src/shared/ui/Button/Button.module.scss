@@ -61,7 +61,8 @@
 }
 
 @media (max-width: 720px) {
-  .button {
+  .button,
+  .text {
     min-height: 44px;
   }
 }
