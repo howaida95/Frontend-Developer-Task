@@ -23,7 +23,7 @@
   width: 42px;
   height: 42px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: #fff;
   display: grid;
   place-items: center;
@@ -64,7 +64,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
     position: sticky;
     top: 0;
     z-index: 5;

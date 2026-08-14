@@ -9,7 +9,7 @@
   padding: 16px;
   display: grid;
   grid-template-columns: minmax(280px, 1fr) 150px 150px;
-  gap: 10px;
+  gap: 12px;
 }
 
 .searchWrap {
@@ -41,11 +41,11 @@
 }
 
 .inlineError {
-  margin: 0 16px 14px;
+  margin: 0 16px 16px;
   background: #fff4f3;
   border: 1px solid #f0d3d1;
   color: #9c3b36;
-  padding: 10px 12px;
+  padding: 12px;
   border-radius: 8px;
   font-size: 13px;
 }

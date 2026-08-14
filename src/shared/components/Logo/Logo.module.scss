@@ -1,7 +1,7 @@
 .logoMark {
   width: 36px;
   height: 36px;
-  border-radius: 9px;
+  border-radius: var(--radius);
   background: var(--brand);
   color: #fff;
   display: grid;

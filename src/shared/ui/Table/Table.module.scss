@@ -19,12 +19,12 @@
 }
 
 .table thead th {
-  font-size: 11px;
+  font-size: 10.5px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
   color: var(--ink-2);
-  background: #fafbfc;
-  font-weight: 700;
+  background: var(--line-2);
+  font-weight: 600;
 }
 
 .table tbody tr:hover,
