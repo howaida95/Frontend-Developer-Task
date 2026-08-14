@@ -20,7 +20,7 @@ function AuthFallback() {
 }
 
 export default function AppRoutes() {
-  const authenticated = true; // Replace with actual authentication logic
+  const authenticated = false; // Replace with actual authentication logic
   const pathname = usePathname();
   const isKnownPath = authenticated ? DASHBOARD_PATHS.has(pathname) : AUTH_PATHS.has(pathname);
 
