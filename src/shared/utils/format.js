@@ -1,3 +1,5 @@
+/* global Intl */
+
 export const localeFor = (lang) => (lang === 'ar' ? 'ar-SA' : 'en-US');
 
 /**
@@ -36,9 +38,11 @@ const toWesternNumerals = (str) => {
  */
 export const number = (value, lang, useArabicNumerals = lang === 'ar') => {
   const formatted = new Intl.NumberFormat(localeFor(lang)).format(value);
-  // ar-SA locale returns Arabic numerals by default, so convert to Western if not wanted
   if (lang === 'ar' && !useArabicNumerals) {
     return toWesternNumerals(formatted);
+  }
+  if (lang === 'ar' && useArabicNumerals) {
+    return toArabicNumerals(formatted);
   }
   return formatted;
 };
@@ -50,9 +54,11 @@ export const number = (value, lang, useArabicNumerals = lang === 'ar') => {
  */
 export const decimal = (value, lang, useArabicNumerals = lang === 'ar') => {
   const formatted = new Intl.NumberFormat(localeFor(lang), { maximumFractionDigits: 1 }).format(value);
-  // ar-SA locale returns Arabic numerals by default, so convert to Western if not wanted
   if (lang === 'ar' && !useArabicNumerals) {
     return toWesternNumerals(formatted);
+  }
+  if (lang === 'ar' && useArabicNumerals) {
+    return toArabicNumerals(formatted);
   }
   return formatted;
 };
@@ -68,9 +74,11 @@ export const percentage = (value, lang, decimals = 1, useArabicNumerals = lang =
     minimumFractionDigits: decimals,
   }).format(value);
   const withPercent = `${formatted}%`;
-  // ar-SA locale returns Arabic numerals by default, so convert to Western if not wanted
   if (lang === 'ar' && !useArabicNumerals) {
     return toWesternNumerals(withPercent);
+  }
+  if (lang === 'ar' && useArabicNumerals) {
+    return toArabicNumerals(withPercent);
   }
   return withPercent;
 };
@@ -85,9 +93,11 @@ export const currency = (value, lang, currency = 'USD', useArabicNumerals = lang
     style: 'currency',
     currency: currency,
   }).format(value);
-  // ar-SA locale returns Arabic numerals by default, so convert to Western if not wanted
   if (lang === 'ar' && !useArabicNumerals) {
     return toWesternNumerals(formatted);
+  }
+  if (lang === 'ar' && useArabicNumerals) {
+    return toArabicNumerals(formatted);
   }
   return formatted;
 };
@@ -106,9 +116,11 @@ export const date = (
   const formatted = new Intl.DateTimeFormat(localeFor(lang), opts).format(
     new Date(`${value}${value.length === 10 ? 'T00:00:00Z' : ''}`),
   );
-  // ar-SA locale returns Arabic numerals by default, so convert to Western if not wanted
   if (lang === 'ar' && !useArabicNumerals) {
     return toWesternNumerals(formatted);
+  }
+  if (lang === 'ar' && useArabicNumerals) {
+    return toArabicNumerals(formatted);
   }
   return formatted;
 };
@@ -126,9 +138,11 @@ export const dateTime = (value, lang, useArabicNumerals = lang === 'ar') => {
     hour: '2-digit',
     minute: '2-digit',
   }).format(new Date(value));
-  // ar-SA locale returns Arabic numerals by default, so convert to Western if not wanted
   if (lang === 'ar' && !useArabicNumerals) {
     return toWesternNumerals(formatted);
+  }
+  if (lang === 'ar' && useArabicNumerals) {
+    return toArabicNumerals(formatted);
   }
   return formatted;
 };
@@ -145,9 +159,11 @@ export const dateFullFormat = (value, lang, useArabicNumerals = lang === 'ar') =
     month: 'long',
     day: 'numeric',
   }).format(new Date(value));
-  // ar-SA locale returns Arabic numerals by default, so convert to Western if not wanted
   if (lang === 'ar' && !useArabicNumerals) {
     return toWesternNumerals(formatted);
+  }
+  if (lang === 'ar' && useArabicNumerals) {
+    return toArabicNumerals(formatted);
   }
   return formatted;
 };
@@ -163,9 +179,11 @@ export const time = (value, lang, useArabicNumerals = lang === 'ar') => {
     minute: '2-digit',
     second: '2-digit',
   }).format(new Date(value));
-  // ar-SA locale returns Arabic numerals by default, so convert to Western if not wanted
   if (lang === 'ar' && !useArabicNumerals) {
     return toWesternNumerals(formatted);
+  }
+  if (lang === 'ar' && useArabicNumerals) {
+    return toArabicNumerals(formatted);
   }
   return formatted;
 };
