@@ -420,5 +420,5 @@ The biggest trade-offs are deliberate:
 - realistic enough to showcase real UI patterns
 - production-minded in key areas such as accessibility and state handling
 - intentionally scoped to the task rather than a broad enterprise platform
--  intentionally commit  large changes and doesn't give detailed pull request  description in certain cases
+-  intentionally commit  large changes and doesn't give detailed pull request  description in certain 
 If more time were available, I would add stronger type safety, broader coverage, more mature CI/reliability tooling, and real RBAC/permission enforcement.

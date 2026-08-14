@@ -1,13 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const isCI = !!process.env.CI;
 const appUrl = process.env.APP_URL || 'http://localhost:5173';
 const apiUrl = process.env.API_URL || 'http://localhost:4000';
 
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
-  retries: process.env.CI ? 2 : 0,
-  reporter: process.env.CI ? 'github' : 'html',
+  retries: isCI ? 2 : 0,
+  reporter: isCI ? 'github' : 'html',
 
   use: {
     baseURL: appUrl,
@@ -19,14 +20,16 @@ export default defineConfig({
 
   webServer: [
     {
-      command: 'node mock-api/server.mjs',
+      command: 'npm run api',
       url: `${apiUrl}/api/auth/me`,
-      reuseExistingServer: !process.env.CI,
+      reuseExistingServer: !isCI,
+      timeout: 60_000,
     },
     {
       command: 'npm run dev -- --host localhost',
       url: appUrl,
-      reuseExistingServer: !process.env.CI,
+      reuseExistingServer: !isCI,
+      timeout: 120_000,
     },
   ],
 });
