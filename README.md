@@ -339,7 +339,7 @@ If this project were extended beyond the brief, I would prioritize the following
 - better toast and inline error handling
 - session refresh flows
 - offline detection and graceful fallback messages
-
+- add sentry configurations 
 ---
 
 ## 4) Tests written and why

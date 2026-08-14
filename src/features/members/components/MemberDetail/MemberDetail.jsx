@@ -16,7 +16,10 @@ function MemberDetail({ id, onClose }) {
   const [sessions, setSessions] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [showConfidential, setShowConfidential] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -26,10 +29,12 @@ function MemberDetail({ id, onClose }) {
       try {
         const [memberResponse, sessionsResponse] = await Promise.all([
           membersService.getMember({ id, signal: controller.signal }),
-          membersService.getSessions({ id, signal: controller.signal }),
+          membersService.getSessions({ id, signal: controller.signal, page: 1 }),
         ]);
         setMember(memberResponse.data);
         setSessions(sessionsResponse.data);
+        setCurrentPage(sessionsResponse.meta.page);
+        setTotalPages(sessionsResponse.meta.last_page);
       } catch (requestError) {
         if (requestError.name !== 'AbortError') setError(requestError.message);
       } finally {
@@ -39,6 +44,25 @@ function MemberDetail({ id, onClose }) {
     load();
     return () => controller.abort();
   }, [id]);
+
+  const handleLoadMore = useCallback(async () => {
+    if (loadingMore || currentPage >= totalPages) return;
+    
+    setLoadingMore(true);
+    try {
+      const nextPage = currentPage + 1;
+      const sessionsResponse = await membersService.getSessions({
+        id,
+        page: nextPage,
+      });
+      setSessions((prev) => [...prev, ...sessionsResponse.data]);
+      setCurrentPage(nextPage);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [id, currentPage, totalPages, loadingMore]);
 
   const handleClose = useCallback(() => onClose(), [onClose]);
   return (
@@ -151,6 +175,16 @@ function MemberDetail({ id, onClose }) {
                 </div>
               ))}
             </div>
+            {currentPage < totalPages && (
+              <Button
+                variant="text"
+                onClick={handleLoadMore}
+                disabled={loadingMore}
+                style={{ marginTop: '1rem', margin: "0 auto", display: "block" }}
+              >
+                {loadingMore ? t('loading', lang) : t('loadMore', lang)}
+              </Button>
+            )}
           </section>
         </>
       )}
