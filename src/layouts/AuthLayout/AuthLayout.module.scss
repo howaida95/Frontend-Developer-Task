@@ -1,0 +1,23 @@
+.loginPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f8fc, #fff);
+  display: grid;
+  place-items: center;
+  padding: 30px;
+}
+
+.loginTop {
+  position: fixed;
+  inset-block-start: 24px;
+  inset-inline-end: 30px;
+}
+
+@media (max-width: 720px) {
+  .loginPage {
+    padding: 18px;
+  }
+
+  .loginTop {
+    inset-inline-end: 18px;
+  }
+}
