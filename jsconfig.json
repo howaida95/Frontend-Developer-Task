@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "@": ["src"],
+      "@/*": ["src/*"],
+      "@features/*": ["src/features/*"],
+      "@shared/*": ["src/shared/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@routes": ["src/routes"],
+      "@routes/*": ["src/routes/*"]
+    }
+  },
+  "include": ["src/**/*.js", "src/**/*.jsx"]
+}

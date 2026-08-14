@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#012169"/>
+
+  <!-- White diagonal stripes -->
+  <path
+    d="M0 0 L1200 800 M1200 0 L0 800"
+    stroke="#fff"
+    stroke-width="160"
+  />
+
+  <!-- Red diagonal stripes -->
+  <path
+    d="M0 0 L1200 800 M1200 0 L0 800"
+    stroke="#C8102E"
+    stroke-width="70"
+  />
+
+  <!-- White cross -->
+  <rect x="500" width="200" height="800" fill="#fff"/>
+  <rect y="300" width="1200" height="200" fill="#fff"/>
+
+  <!-- Red cross -->
+  <rect x="545" width="110" height="800" fill="#C8102E"/>
+  <rect y="345" width="1200" height="110" fill="#C8102E"/>
+</svg>
