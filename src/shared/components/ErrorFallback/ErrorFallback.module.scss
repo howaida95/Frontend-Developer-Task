@@ -1,0 +1,48 @@
+.errorFallback {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: var(--doc);
+}
+
+.card {
+  width: min(560px, 100%);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff0ef;
+  color: var(--danger);
+  font-weight: 800;
+}
+
+.errorFallback h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.errorFallback p {
+  color: var(--ink-2);
+}
+
+.errorFallback pre {
+  text-align: start;
+  overflow: auto;
+  background: #f7f8fa;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 12px;
+}

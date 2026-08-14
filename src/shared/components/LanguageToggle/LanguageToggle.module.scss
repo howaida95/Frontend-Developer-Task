@@ -1,0 +1,151 @@
+.languageToggle {
+  position: relative;
+  width: 100%;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+  text-align: start;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.05s;
+  overflow: visible;
+}
+
+.languageToggle:hover {
+  background: var(--brand-wash);
+  border-color: #cbd7e8;
+}
+
+.languageToggle:active {
+  transform: translateY(1px);
+}
+
+.toggleButton {
+  position: relative;
+  width: 100%;
+  min-height: 32px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 28px 7px 10px;
+  text-align: start;
+  cursor: pointer;
+}
+
+.flag {
+  width: 18px;
+  height: 18px;
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.label,
+.option span {
+  line-height: 18px;
+}
+
+.chevron {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--ink-3);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.options {
+  position: absolute;
+  top: calc(100% + 4px);
+  inset-inline-start: 0;
+  width: 100%;
+  min-width: 100%;
+  z-index: 120;
+  display: grid;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(28, 36, 48, 0.12);
+}
+
+.option {
+  width: 100%;
+  height: 30px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 7px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: start;
+  cursor: pointer;
+}
+
+.option:hover,
+.option:focus-visible,
+.optionActive {
+  background: var(--brand-wash);
+  color: var(--brand-deep);
+}
+
+.rtl .chevron {
+  right: auto;
+  left: 10px;
+}
+
+.rtl .toggleButton {
+  padding: 7px 10px 7px 28px;
+  text-align: right;
+}
+
+.rtl .option {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  :global(header) > .languageToggle,
+  :global(.mobileTop) .languageToggle {
+    width: auto;
+    min-width: 72px;
+    justify-content: center;
+  }
+
+  .languageToggle .toggleButton {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .chevron {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .languageToggle {
+    transition: none;
+  }
+}
