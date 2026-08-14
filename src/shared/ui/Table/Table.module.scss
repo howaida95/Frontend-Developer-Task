@@ -1,0 +1,44 @@
+.scroll {
+  overflow-x: auto;
+  border-top: 1px solid var(--line-2);
+  border-bottom: 1px solid var(--line-2);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.table th,
+.table td {
+  text-align: start;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--line-2);
+  white-space: nowrap;
+}
+
+.table thead th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-2);
+  background: #fafbfc;
+  font-weight: 700;
+}
+
+.table tbody tr:hover,
+.table tbody tr:focus {
+  background: #f8faff;
+  outline: none;
+}
+
+.table tbody tr[tabindex='0'] {
+  cursor: pointer;
+}
+
+.empty {
+  text-align: center;
+  padding: 50px;
+  color: var(--ink-3);
+}

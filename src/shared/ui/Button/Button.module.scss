@@ -1,0 +1,53 @@
+.button {
+  min-height: 40px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0 14px;
+  font-weight: 700;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.05s;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.primary {
+  background: var(--brand);
+  color: #fff;
+}
+
+.primary:hover {
+  background: var(--brand-deep);
+}
+
+.secondary {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--ink-2);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--brand-deep);
+  padding-inline: 6px;
+}
+
+.logout {
+  background: transparent;
+  color: var(--danger);
+}
+
+@media (max-width: 720px) {
+  .button {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
