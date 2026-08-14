@@ -7,7 +7,7 @@
   gap: 8px;
   padding: 0;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: #fff;
   color: var(--ink);
   font-weight: 700;
@@ -81,7 +81,7 @@
   display: grid;
   padding: 4px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: #fff;
   box-shadow: 0 10px 24px rgba(28, 36, 48, 0.12);
 }
@@ -131,12 +131,18 @@
   :global(.mobileTop) .languageToggle {
     width: auto;
     min-width: 72px;
+    min-height: 44px;
     justify-content: center;
   }
 
   .languageToggle .toggleButton {
     min-width: 100%;
     width: 100%;
+    min-height: 44px;
+  }
+
+  .option {
+    height: 44px;
   }
 
   .chevron {

@@ -35,7 +35,7 @@
 .sidebarLogo {
   width: 36px;
   height: 36px;
-  border-radius: 9px;
+  border-radius: var(--radius);
 }
 
 .sidebarBrandText {
@@ -103,7 +103,7 @@
 .sidebarLogout {
   width: 100%;
   height: 44px;
-  border-radius: 10px;
+  border-radius: var(--radius);
 }
 
 .page {
@@ -151,20 +151,20 @@
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 22px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .statCard {
-  min-height: 142px;
+  min-height: 132px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 7px;
+  gap: 8px;
 }
 
 .line {
@@ -188,7 +188,7 @@
   padding: 16px;
   display: grid;
   grid-template-columns: minmax(280px, 1fr) 150px 150px;
-  gap: 10px;
+  gap: 12px;
 }
 
 .filter,
@@ -220,7 +220,7 @@
 }
 
 .tableHeader {
-  background: #fafbfc;
+  background: var(--line-2);
 }
 
 .tableCell {

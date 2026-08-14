@@ -42,7 +42,7 @@
 
   &::-webkit-scrollbar-thumb {
     background: var(--line);
-    border-radius: 10px;
+    border-radius: var(--radius);
     border: 2px solid transparent;
     background-clip: padding-box;
     margin: 6px 2px;
@@ -92,7 +92,9 @@
 
 .header h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 650;
 }
 
 .closeButton {
@@ -144,6 +146,11 @@
 @media (max-width: 720px) {
   .modal {
     padding: 0;
+  }
+
+  .closeButton {
+    width: 44px;
+    height: 44px;
   }
 
   .right .dialog,

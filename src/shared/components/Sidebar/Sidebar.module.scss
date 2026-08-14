@@ -167,7 +167,7 @@
   min-height: 44px;
   padding: 0 12px;
   border: 1px solid #f0d7d5;
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: #fff7f6;
   color: var(--danger);
   font-weight: 750;
@@ -247,10 +247,16 @@
 
   .closeButton {
     display: flex;
+    width: 44px;
+    height: 44px;
   }
 
   .sidebar nav {
     margin-top: 30px;
+  }
+
+  .navItem {
+    height: 44px;
   }
 
   .footer {
