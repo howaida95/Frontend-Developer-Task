@@ -1,6 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import authReducer, { logout } from '@features/auth/authSlice';
 import sessionReducer, { clearSession } from '@features/auth/sessionSlice';
+import { summaryReducer } from '@features/dashboard/summarySlice';
 
 const storedLanguage = localStorage.getItem('riverside_language') || 'en';
 
@@ -37,6 +38,7 @@ export const store = configureStore({
     language: languageSlice.reducer,
     auth: authReducer,
     ui: uiSlice.reducer,
+    summary: summaryReducer,
   },
   devTools: import.meta.env.DEV,
 });
