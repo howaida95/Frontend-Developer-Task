@@ -27,6 +27,7 @@ export default class ErrorBoundary extends Component {
           error={this.state.error}
           resetErrorBoundary={this.reset}
           lang={this.props.lang}
+          as={this.props.fallbackAs}
         />
       );
     return this.props.children;

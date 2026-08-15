@@ -3,9 +3,9 @@ import Button from '@shared/ui/Button';
 import { t } from '@shared/i18n';
 import styles from './ErrorFallback.module.scss';
 
-function ErrorFallback({ error, resetErrorBoundary, lang = 'en' }) {
+function ErrorFallback({ error, resetErrorBoundary, lang = 'en', as: Element = 'main' }) {
   return (
-    <main className={styles.errorFallback} role="alert" aria-live="assertive">
+    <Element className={styles.errorFallback} role="alert" aria-live="assertive">
       <div className={styles.card}>
         <span className={styles.icon} aria-hidden="true">
           !
@@ -15,7 +15,7 @@ function ErrorFallback({ error, resetErrorBoundary, lang = 'en' }) {
         {import.meta.env.DEV && error?.message && <pre>{error.message}</pre>}
         <Button onClick={resetErrorBoundary}>{t('tryAgain', lang)}</Button>
       </div>
-    </main>
+    </Element>
   );
 }
 

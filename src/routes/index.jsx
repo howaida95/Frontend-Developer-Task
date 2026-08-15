@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import AuthLayout from '@layouts/AuthLayout/index.js';
 import DashboardLayout from '@layouts/DashboardLayout/index.js';
+import ErrorBoundary from '@shared/components/ErrorBoundary/index.js';
 import PageSkeleton from '@shared/ui/PageSkeleton';
 
 const LoginPage = lazy(() => import('@features/auth/pages/LoginPage/index.js'));
@@ -21,6 +22,7 @@ function AuthFallback() {
 
 export default function AppRoutes() {
   const authenticated = useSelector((state) => state.session.authenticated);
+  const lang = useSelector((state) => state.language.value);
   const pathname = usePathname();
   const isKnownPath = authenticated ? DASHBOARD_PATHS.has(pathname) : AUTH_PATHS.has(pathname);
 
@@ -30,30 +32,46 @@ export default function AppRoutes() {
         authenticated ? (
           <Suspense fallback={<DashboardFallback />}>
             <DashboardLayout>
-              <NotFoundPage />
+              <PageBoundary boundaryKey={`dashboard:not-found:${pathname}`} lang={lang}>
+                <NotFoundPage />
+              </PageBoundary>
             </DashboardLayout>
           </Suspense>
         ) : (
           <Suspense fallback={<AuthFallback />}>
             <AuthLayout>
-              <NotFoundPage />
+              <PageBoundary boundaryKey={`auth:not-found:${pathname}`} lang={lang}>
+                <NotFoundPage />
+              </PageBoundary>
             </AuthLayout>
           </Suspense>
         )
       ) : authenticated ? (
         <Suspense fallback={<DashboardFallback />}>
           <DashboardLayout>
-            <DashboardPage />
+            <PageBoundary boundaryKey={`dashboard:${pathname}`} lang={lang}>
+              <DashboardPage />
+            </PageBoundary>
           </DashboardLayout>
         </Suspense>
       ) : (
         <Suspense fallback={<AuthFallback />}>
           <AuthLayout>
-            <LoginPage />
+            <PageBoundary boundaryKey={`auth:${pathname}`} lang={lang}>
+              <LoginPage />
+            </PageBoundary>
           </AuthLayout>
         </Suspense>
       )}
     </>
+  );
+}
+
+function PageBoundary({ boundaryKey, lang, children }) {
+  return (
+    <ErrorBoundary key={boundaryKey} lang={lang} fallbackAs="section">
+      {children}
+    </ErrorBoundary>
   );
 }
 
