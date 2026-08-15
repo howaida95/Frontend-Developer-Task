@@ -36,9 +36,10 @@ export const hydrateSession = createAsyncThunk(
 export const logout = createAsyncThunk('auth/logout', async () => {
   try {
     await authService.logout();
-  } finally {
-    return true;
+  } catch {
+    // Logout should still clear local state if the server session is already gone.
   }
+  return true;
 });
 
 const slice = createSlice({
