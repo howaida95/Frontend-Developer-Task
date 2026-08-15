@@ -391,55 +391,53 @@ I also did not fully expand the fallback-message translations beyond the current
 
 The task brief describes the member details interaction as a drawer that slides in from the left or right, while the provided design specification/prototype presents the member details as a centered modal. I prioritized the provided visual design specification for consistency with the intended UI and implemented the member details as a centered modal.
 
-#### Monthly progress data
-### Monthly Progress — Data Observation & Business Rule
 
+## Assumptions & Implementation Decisions
+
+### Monthly Progress — Data Observation
 
 The mock API provides `sessionsThisMonth` and `monthlyGoal` values where
 the number of completed sessions can exceed the member's monthly goal.
 
-
 For example:
-
 
 ```json
 {
   "sessionsThisMonth": 20,
   "monthlyGoal": 12
 }
+```
 
 This represents 20 completed sessions against a monthly goal of 12,
-resulting in 166.7% goal completion.
+resulting in **166.7% goal completion**.
 
-Implementation Decision
+#### Implementation Decision
 
 I treated exceeding the monthly goal as a valid business scenario rather
 than assuming the API data is incorrect.
 
 The implementation:
 
-Preserves the API values without modification.
+- Preserves the API values without modification.
+- Calculates the actual completion percentage using:
+  `sessionsThisMonth / monthlyGoal * 100`
+- Caps the visual progress indicator at `100%` to prevent the progress bar
+  from overflowing its container.
+- Allows the member to be represented as having exceeded their target.
 
-Calculates the actual completion percentage using:
-
-sessionsThisMonth / monthlyGoal * 100
-
-Caps the visual progress indicator at 100% to prevent the progress bar
-from overflowing its container.
-Allows the member to be represented as having exceeded their target.
-Production Consideration
+#### Production Consideration
 
 In a production environment, I would clarify this behavior with the
 Product and Backend teams before finalizing the business rule.
 
 I would specifically confirm:
 
-Whether members are expected to exceed their monthly goals.
-Whether sessionsThisMonth > monthlyGoal is an expected API state.
-Whether the UI should show the actual percentage (e.g. 166.7%) or only
-indicate that the goal has been reached/exceeded.
-Whether the repeated values in the mock data are intentional or simply
-part of the test data.
+- Whether members are expected to exceed their monthly goals.
+- Whether `sessionsThisMonth > monthlyGoal` is an expected API state.
+- Whether the UI should show the actual percentage (e.g. `166.7%`) or only
+  indicate that the goal has been reached/exceeded.
+- Whether the repeated values in the mock data are intentional or simply
+  part of the test data.
 
 If exceeding the goal is an expected business scenario, this behavior
 would be documented as part of the API/business contract. If it is not
@@ -448,7 +446,7 @@ silently corrected in the frontend.
 
 ---
 
-## Project structure overview
+## Project Structure
 
 ```text
 .
@@ -484,6 +482,14 @@ silently corrected in the frontend.
 |-- eslint.config.js
 `-- jsconfig.json
 ```
+
+The structure is intentionally split by ownership. Feature folders contain
+domain-specific pages, components, Redux slices, and API services. The
+`shared` folder contains reusable components, UI primitives, hooks, and
+cross-cutting utilities.
+
+Layouts and routes remain separate so navigation, authentication, and page
+composition do not leak into individual feature components.
 
 The structure is intentionally split by ownership. Feature folders contain domain-specific pages, components, slices, and API services. The `shared` folder contains reusable primitives and cross-cutting utilities. Layouts and routes remain separate so navigation, authentication shell decisions, and page composition do not leak into individual feature components.
 
