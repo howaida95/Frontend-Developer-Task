@@ -2,6 +2,16 @@
 
 A mobile-first club administration dashboard for staff and member-facing workflows, built with React, Vite, Redux Toolkit, and SCSS modules. The app includes login, dashboard summary cards, member listing, language switching, responsive navigation, and mock API-backed data flows.
 
+## Assignment review notes
+
+This implementation is structured to show product thinking as well as UI delivery:
+
+- feature-based folders keep auth, dashboard, and members isolated from shared UI primitives
+- route-level error boundaries keep failures local to the active page instead of replacing the whole app shell
+- the member details view follows the provided visual design specification as a centered modal, even though the written brief mentions a side drawer
+- responsive navigation, accessible modal semantics, keyboard escape handling, and localized layout direction were treated as core requirements
+- mock API services are separated from components so a real backend contract could be introduced without rewriting the UI
+
 ## 1) How to run it
 
 ### Prerequisites
@@ -92,7 +102,7 @@ This is a good fit for a product that is primarily UI-driven rather than server-
 
 #### Feature-oriented structure
 
-The codebase is organized around feature boundaries rather than a generic “components only” structure:
+The codebase is organized around feature boundaries rather than a generic "components only" structure:
 
 - `src/features/auth`
 - `src/features/dashboard`
@@ -232,7 +242,7 @@ The mock API is intentionally small but realistic. It makes front-end behavior t
 
 #### Error boundaries and skeleton loading
 
-There is an `ErrorBoundary` and a `PageSkeleton` used during auth/session hydration and route transitions. That improves resilience and prevents a single failed sub-tree from crashing the entire app.
+There is an `ErrorBoundary` around each routed page and a `PageSkeleton` used during auth/session hydration and route transitions. That improves resilience and prevents one failed page subtree from taking down the whole dashboard shell.
 
 This is a good baseline for reliability but would be expanded with more specialized error states, retry behavior, and toast notifications in real production.
 
@@ -253,7 +263,7 @@ The app is intentionally pragmatic:
 - login errors are surfaced via the Redux auth slice
 - failed member or summary calls are handled at the UI layer
 - skeleton UI is displayed while checking the session
-- the app uses a global error boundary for unexpected crashes
+- route-level error boundaries handle unexpected page crashes
 
 This is a good middle ground for a short project. It keeps the user from seeing a blank screen while still preserving a clear failure path.
 
@@ -375,38 +385,72 @@ This gives good confidence without creating a brittle suite full of CSS selector
 
 #### What I intentionally did not do
 
-I did not spend time creating large exhaustive coverage of every possible member filter combination or every edge-case table row. That would be a lower return for the effort in a small project unless the app were much larger.
-and didn't translate  fallback messages
+I did not spend time creating exhaustive coverage for every member filter combination or every edge-case table row. That would be a lower return for the effort in a small project unless the app were much larger.
+
+I also did not fully expand the fallback-message translations beyond the current localized strings. With more time, I would audit every empty, loading, retry, and error state in both supported languages.
+
+The task brief describes the member details interaction as a drawer that slides in from the left or right, while the provided design specification/prototype presents the member details as a centered modal. I prioritized the provided visual design specification for consistency with the intended UI and implemented the member details as a centered modal.
+
+#### Monthly progress data
+
+The mock API contains members whose `sessionsThisMonth` value is greater than their `monthlyGoal`.
+
+For example:
+
+- `sessionsThisMonth`: 20
+- `monthlyGoal`: 12
+- Calculated progress: `166.7%`
+
+I treated this as a valid scenario where a member has exceeded their monthly goal rather than assuming the API data is invalid.
+
+The implementation therefore:
+
+1. Preserves the API values as provided.
+2. Calculates the actual progress percentage from `sessionsThisMonth / monthlyGoal`.
+3. Caps the progress bar at `100%` for visual consistency and to prevent the indicator from overflowing its container.
+
+This means the member can still be shown as having exceeded their goal, while the progress bar remains visually full once the goal has been reached.
+
 ---
 
 ## Project structure overview
 
 ```text
 .
-├── .github/workflows/ci.yml
-├── mock-api/
-│   └── server.mjs
-├── public/
-├── src/
-│   ├── App.jsx
-│   ├── features/
-│   │   ├── auth/
-│   │   ├── dashboard/
-│   │   └── members/
-│   ├── layouts/
-│   ├── routes/
-│   ├── shared/
-│   └── styles/
-├── e2e/
-├── package.json
-├── vite.config.js
-├── vitest.config.js
-├── playwright.config.js
-├── .eslintrc.cjs
-├── .prettierrc
-├── jsconfig.json
-└── style.md
+|-- mock-api/
+|   |-- README.md
+|   `-- server.mjs
+|-- public/
+|-- src/
+|   |-- App.jsx
+|   |-- main.jsx
+|   |-- assets/
+|   |-- features/
+|   |   |-- auth/
+|   |   |-- dashboard/
+|   |   `-- members/
+|   |-- layouts/
+|   |-- routes/
+|   |-- shared/
+|   |   |-- api/
+|   |   |-- components/
+|   |   |-- hooks/
+|   |   |-- i18n/
+|   |   |-- store/
+|   |   |-- ui/
+|   |   `-- utils/
+|   |-- styles/
+|   `-- test/
+|-- e2e/
+|-- package.json
+|-- vite.config.js
+|-- vitest.config.js
+|-- playwright.config.js
+|-- eslint.config.js
+`-- jsconfig.json
 ```
+
+The structure is intentionally split by ownership. Feature folders contain domain-specific pages, components, slices, and API services. The `shared` folder contains reusable primitives and cross-cutting utilities. Layouts and routes remain separate so navigation, authentication shell decisions, and page composition do not leak into individual feature components.
 
 ---
 
@@ -420,5 +464,5 @@ The biggest trade-offs are deliberate:
 - realistic enough to showcase real UI patterns
 - production-minded in key areas such as accessibility and state handling
 - intentionally scoped to the task rather than a broad enterprise platform
--  intentionally commit  large changes and doesn't give detailed pull request  description in certain 
+
 If more time were available, I would add stronger type safety, broader coverage, more mature CI/reliability tooling, and real RBAC/permission enforcement.
