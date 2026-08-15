@@ -15,12 +15,13 @@ function StatCard({ label, value, meta, loading, error, onRetry }) {
           <Skeleton className={styles.numberSkeleton} />
         </>
       ) : error ? (
-        <>
-          <span className={styles.errorLabel}>{error}</span>
+        <div className={styles.errorContent}>
+          <span className={styles.errorState}>Failed</span>
           <Button variant="ghost" className={styles.retryLink} onClick={onRetry}>
             Retry
           </Button>
-        </>
+          <span className={styles.errorLabel}>{error}</span>
+        </div>
       ) : (
         <>
           <span className={styles.label}>{label}</span>
