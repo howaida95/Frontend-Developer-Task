@@ -392,24 +392,59 @@ I also did not fully expand the fallback-message translations beyond the current
 The task brief describes the member details interaction as a drawer that slides in from the left or right, while the provided design specification/prototype presents the member details as a centered modal. I prioritized the provided visual design specification for consistency with the intended UI and implemented the member details as a centered modal.
 
 #### Monthly progress data
+### Monthly Progress — Data Observation & Business Rule
 
-The mock API contains members whose `sessionsThisMonth` value is greater than their `monthlyGoal`.
+
+The mock API provides `sessionsThisMonth` and `monthlyGoal` values where
+the number of completed sessions can exceed the member's monthly goal.
+
 
 For example:
 
-- `sessionsThisMonth`: 20
-- `monthlyGoal`: 12
-- Calculated progress: `166.7%`
 
-I treated this as a valid scenario where a member has exceeded their monthly goal rather than assuming the API data is invalid.
+```json
+{
+  "sessionsThisMonth": 20,
+  "monthlyGoal": 12
+}
 
-The implementation therefore:
+This represents 20 completed sessions against a monthly goal of 12,
+resulting in 166.7% goal completion.
 
-1. Preserves the API values as provided.
-2. Calculates the actual progress percentage from `sessionsThisMonth / monthlyGoal`.
-3. Caps the progress bar at `100%` for visual consistency and to prevent the indicator from overflowing its container.
+Implementation Decision
 
-This means the member can still be shown as having exceeded their goal, while the progress bar remains visually full once the goal has been reached.
+I treated exceeding the monthly goal as a valid business scenario rather
+than assuming the API data is incorrect.
+
+The implementation:
+
+Preserves the API values without modification.
+
+Calculates the actual completion percentage using:
+
+sessionsThisMonth / monthlyGoal * 100
+
+Caps the visual progress indicator at 100% to prevent the progress bar
+from overflowing its container.
+Allows the member to be represented as having exceeded their target.
+Production Consideration
+
+In a production environment, I would clarify this behavior with the
+Product and Backend teams before finalizing the business rule.
+
+I would specifically confirm:
+
+Whether members are expected to exceed their monthly goals.
+Whether sessionsThisMonth > monthlyGoal is an expected API state.
+Whether the UI should show the actual percentage (e.g. 166.7%) or only
+indicate that the goal has been reached/exceeded.
+Whether the repeated values in the mock data are intentional or simply
+part of the test data.
+
+If exceeding the goal is an expected business scenario, this behavior
+would be documented as part of the API/business contract. If it is not
+expected, the issue should be addressed at the data/API level rather than
+silently corrected in the frontend.
 
 ---
 
