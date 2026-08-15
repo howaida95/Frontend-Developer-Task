@@ -30,4 +30,10 @@ export default [
       ],
     },
   },
+  {
+    files: ['*.config.js', 'eslint.config.js', 'playwright.config.js', 'vite.config.js', 'vitest.config.js'],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
 ]
