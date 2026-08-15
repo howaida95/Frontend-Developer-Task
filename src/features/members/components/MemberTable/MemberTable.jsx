@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setQuery } from '@features/members/membersSlice';
 import StatusBadge from '@shared/components/StatusBadge/index.js';
@@ -18,9 +18,14 @@ function MemberTable({ onSelect }) {
   const busy = status === 'loading';
   const [searchValue, setSearchValue] = useState(query.search);
   const debouncedSearch = useDebounce(searchValue, 300);
-  const update = (payload) => dispatch(setQuery({ ...payload, page: payload.page ?? 1 }));
-  const sort = (key) =>
-    update({ sort: key, dir: query.sort === key && query.dir === 'asc' ? 'desc' : 'asc' });
+  const update = useCallback(
+    (payload) => dispatch(setQuery({ ...payload, page: payload.page ?? 1 })),
+    [dispatch],
+  );
+  const sort = useCallback(
+    (key) => update({ sort: key, dir: query.sort === key && query.dir === 'asc' ? 'desc' : 'asc' }),
+    [query.dir, query.sort, update],
+  );
 
   useEffect(() => {
     setSearchValue(query.search);
@@ -101,7 +106,7 @@ function MemberTable({ onSelect }) {
         render: (member) => <span className={styles.numeric}>{number(member.totalSessions, lang)}</span>,
       },
     ],
-    [lang, query.sort, query.dir],
+    [lang, query.sort, query.dir, sort],
   );
 
   return (

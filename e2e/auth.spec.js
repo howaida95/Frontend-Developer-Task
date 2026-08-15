@@ -7,7 +7,7 @@ async function signIn(page) {
   await page.getByLabel(/password/i).fill('Passw0rd!');
   await page.getByRole('button', { name: /sign in/i }).click();
 
-  await expect(page.getByRole('main')).toBeVisible({ timeout: 15000 });
+  await expect(page.locator('#primary-sidebar')).toBeAttached({ timeout: 15000 });
   await expect(page.getByRole('button', { name: /switch to arabic|switch to english/i })).toBeVisible({
     timeout: 15000,
   });

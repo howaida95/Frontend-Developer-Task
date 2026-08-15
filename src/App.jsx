@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { hydrateSession, logout } from '@features/auth/authSlice';
 import AppRoutes from '@routes';
-import ErrorBoundary from '@shared/components/ErrorBoundary/index.js';
 import PageSkeleton from '@shared/ui/PageSkeleton';
 import { t } from '@shared/i18n';
 
@@ -29,9 +28,5 @@ export default function App() {
 
   if (sessionStatus === 'checking') return <PageSkeleton />;
 
-  return (
-    <ErrorBoundary lang={lang}>
-      <AppRoutes />
-    </ErrorBoundary>
-  );
+  return <AppRoutes />;
 }
