@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import ErrorBoundary from '@shared/components/ErrorBoundary/index.js';
+import ErrorBoundary from '../../components/ErrorBoundary/index.js';
 
 let consoleErrorSpy;
 

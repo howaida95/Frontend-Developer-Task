@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { membersReducer, fetchMembers } from '@features/members/membersSlice';
+import { membersReducer, fetchMembers } from '../membersSlice';
 
 describe('members reducer', () => {
   it('accepts only the latest request response', () => {
