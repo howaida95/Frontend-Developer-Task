@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import StatCard from '@shared/components/StatCard/index.js';
+import StatCard from '../../components/StatCard/index.js';
 
 describe('StatCard', () => {
   it('shows a retry state matching the failed summary card layout', async () => {
@@ -12,7 +12,7 @@ describe('StatCard', () => {
       <StatCard
         label="Sessions this month"
         value="1,200"
-        error="We couldn’t load the overview."
+        error="We couldn't load the overview."
         onRetry={onRetry}
       />,
     );

@@ -358,6 +358,38 @@ If this project were extended beyond the brief, I would prioritize the following
 
 The project includes a mix of unit and end-to-end tests aimed at the highest-risk user flows:
 
+#### Unit tests
+
+The unit test suite validates critical Redux state management and API contracts. We test what the product needs to guarantee:
+
+**Auth and session state management** (`authSlice.test.js`, `sessionSlice.test.js`):
+- Login triggers loading state and resolves to authenticated status only for admin users
+- Non-admin users are rejected with appropriate error messages
+- Session hydration verifies the user's admin status on app startup
+- Logout clears authentication and returns to anonymous state
+
+**Why these tests matter:** Authorization is a security boundary. These tests ensure only admins access the portal and that state transitions are predictable. If auth state is wrong, the entire app is compromised.
+
+**Dashboard summary state** (`summarySlice.test.js`):
+- Summary data loads asynchronously and updates Redux state correctly
+- Failed requests set error status and preserve previous data
+- Retry logic clears errors and allows fresh attempts
+
+**Why these tests matter:** The dashboard summary is the first thing users see. State predictability here is critical for showing accurate data and handling network failures gracefully.
+
+**API service mocking** (`authService.test.js`, `dashboardService.test.js`, `membersService.test.js`):
+- Services correctly format and send HTTP requests
+- Response data is normalized appropriately
+- Network errors are caught and reported
+
+**Why these tests matter:** These tests define the contract between the frontend and backend. They prove the app can work with a real API by validating the request/response shape before it's integrated.
+
+**Integration tests** (`auth.integration.test.jsx`, `dashboard.integration.test.jsx`, `members.integration.test.jsx`):
+- Full feature flows work end-to-end with Redux, routing, and components together
+- Redux store state is correctly populated and accessible to components
+
+**Why these tests matter:** Unit tests can pass while integration is broken. These tests catch mismatches between Redux, routes, and component rendering.
+
 #### End-to-end tests
 
 The Playwright tests focus on realistic user journeys and accessibility contracts, which is where the product is most likely to fail in production.
@@ -380,8 +412,22 @@ I prioritized tests that cover:
 - state transitions driven by real UI interaction
 - accessibility-related values such as `aria-expanded` and `aria-hidden`
 - real user journeys rather than implementation details
+- **authorization boundaries** (admin-only access)
+- **data accuracy** (dashboard, member lists)
+- **error resilience** (failed API calls, session expiry)
 
 This gives good confidence without creating a brittle suite full of CSS selector or snapshot-only assertions.
+
+#### What these tests tell us we need
+
+The test suite reveals the product's core requirements:
+
+1. **Secure authorization** — Only admin users can access the portal; non-admins must be rejected consistently
+2. **Predictable state management** — Redux state transitions must be atomic and testable without implementation details leaking
+3. **Network resilience** — API failures must not crash the app; users must be able to retry
+4. **Session persistence** — The app must hydrate the user session on load and reject unauthorized access
+5. **Accessible interaction** — UI patterns must support keyboard and screen-reader users
+6. **Data accuracy** — Summary and member data must flow correctly from API → Redux → UI
 
 #### What I intentionally did not do
 

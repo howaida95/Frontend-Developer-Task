@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Modal from '@shared/ui/Modal';
+import Modal from '../../ui/Modal/index.js';
 
 // Mock the SVG icon import
 vi.mock('@/assets/icons/close.svg?react', () => ({
